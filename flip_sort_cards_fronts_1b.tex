@@ -1,0 +1,22 @@
+\documentclass{standalone}
+
+\usepackage{flipsort}
+
+
+\begin{document}
+\begin{tikzpicture}
+\large
+\path (-105mm, -148.5mm) -- (105mm, 148.5mm);
+\pic at (-\horizdist,\vertdist) {cardfrontprintable={red_rose}{yellow_sunflower2}{blue_butterfly}{honey_bee}{0.9}{0.3}{0.4}{black}};
+\pic at (0\horizdist,\vertdist) {cardfrontprintable={red_rose}{purple_lilac2}{blue_butterfly}{honey_bee}{0.9}{0.3}{0.4}{black}};
+\pic at (\horizdist,\vertdist) {cardfrontprintable={red_rose}{white_lilly}{blue_butterfly}{honey_bee}{0.9}{0.3}{0.4}{black}};
+%
+\pic at (-\horizdist,0\vertdist) {cardfrontprintable={yellow_sunflower2}{purple_lilac2}{blue_butterfly}{honey_bee}{0.9}{0.15}{0.4}{black}};
+\pic at (0\horizdist,0\vertdist) {cardfrontprintable={yellow_sunflower2}{white_lilly}{blue_butterfly}{honey_bee}{0.9}{0.15}{0.4}{black}};
+\pic at (\horizdist,0\vertdist) {cardfrontprintable={purple_lilac2}{white_lilly}{blue_butterfly}{honey_bee}{0.9}{0.4}{0.4}{black}};
+%
+\pic at (-\horizdist,-\vertdist) {cardfrontprintable={red_rose}{yellow_sunflower2}{honey_bee}{dragonfly}{0.5}{0.3}{0.6}{black}};
+\pic at (0\horizdist,-\vertdist) {cardfrontprintable={red_rose}{purple_lilac2}{honey_bee}{dragonfly}{0.5}{0.3}{0.6}{black}};
+\pic at (\horizdist,-\vertdist) {cardfrontprintable={red_rose}{white_lilly}{honey_bee}{dragonfly}{0.5}{0.3}{0.6}{black}};
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,106 @@
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz}
+
+\usepackage{contour}
+\contournumber{1000}
+\usepackage{fontspec}
+\setmainfont[Scale=3.75]{Card Characters}
+
+\usepackage{calc}
+
+\newlength{\cardwidth}
+\newlength{\cardheight}
+\newlength{\bleed}
+\newlength{\horizspace}
+\newlength{\vertspace}
+\newlength{\vertdist}
+\newlength{\horizdist}
+
+\setlength{\cardwidth}{2.5in}
+\setlength{\cardheight}{3.5in}
+\setlength{\bleed}{0.0625in}
+\setlength{\horizspace}{0.0625in}
+\setlength{\horizdist}{\cardwidth + 2\bleed + \horizspace}
+\setlength{\vertspace}{0.0625in}
+\setlength{\vertdist}{\cardheight + 2\bleed + \vertspace}
+
+\newcommand{\myclub}{\contour{black}{\textcolor{ForestGreen}{]}}}
+\newcommand{\mydiamond}{\contour{black}{\textcolor{Goldenrod}{[}}}
+\newcommand{\myheart}{\contour{black}{\textcolor{Red}{\{}}}
+\newcommand{\myspade}{\contour{black}{\textcolor{RoyalBlue}{\}}}}
+
+\tikzset{guidecross/.pic={
+	\draw[#1] (-\bleed,0) -- (\bleed,0);
+	\draw[#1] (0, -\bleed) -- (0, \bleed);
+}}
+
+\tikzset{cutguide/.pic={
+	\pic () at (-\cardwidth/2, \cardheight/2) {guidecross={#1}};
+	\pic () at (\cardwidth/2, \cardheight/2) {guidecross={#1}};
+	\pic () at (-\cardwidth/2, -\cardheight/2) {guidecross={#1}};
+	\pic () at (\cardwidth/2, -\cardheight/2) {guidecross={#1}};
+}}
+
+\tikzset{pics/cardfrontpattern/.style n args={2}{%
+	code={
+	\setmainfont[Scale=6.0]{Card Characters}
+	\node (c) at (0, 0) {{\LARGE #1}};
+	\node (ul) at (-0.9in, 1.4in) {{\tiny #2}};
+	\node (ur) at (0.9in, 1.4in) {{\tiny #2}};
+
+	\node[transform shape, rotate=180] (lr) at (0.9in, -1.4in) {{\tiny #2}};
+	\node[transform shape, rotate=180] (ll) at (-0.9in, -1.4in) {{\tiny #2}};
+
+}}}
+
+\tikzset{pics/cardfrontpattern2/.style n args={7}{%
+	code={
+	\setmainfont[Scale=6.0]{Card Characters}
+	\node (c) at (-0.125in, 0.3in) {\includegraphics[height=2.0in]{#1}};
+	
+	\node[transform shape, rotate=0] (ll) at (-0.5in, -1.3in) {\includegraphics[height=0.625in]{#2}};
+	\node[transform shape, rotate=0] (lr) at (0.5in, -1.3in) {\includegraphics[height=#7in]{#4}};
+
+	\node at (0.9in - #6in, 1.175in) {\includegraphics[height=#5in]{#3.png}};
+	
+%	\draw[thick, rounded corners=1mm] (-1.25in-\bleed, -1.0in) -- (-0.625in, -1.0in) -- (-0.625in, -1.75in - \bleed);
+%	\draw[thick, rounded corners=1mm] (1.25in+\bleed, -1.0in) -- (0.625in, -1.0in) -- (0.625in, -1.75in - \bleed);
+
+	\draw[line width=1mm] (-1.125in, -0.875in) -- (1.125in, -0.875in);
+
+}}}
+
+\tikzset{pics/cardfrontprintable/.style n args={8}{%
+	code={
+	\begin{scope}
+	\clip (-\cardwidth/2 - \bleed, 0in) --%
+	      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+	      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+	      cycle;
+	% Pattern for card front
+	\pic () at (0,0) {cardfrontpattern2={#1}{#2}{#3}{#4}{#5}{#6}{#7}};
+	% Cutting guides for corners of the cards	
+	\pic () at (0,0) {cutguide={#8}};
+%	\node[draw, minimum width=\cardwidth, minimum height=\cardheight] at (0,0) {};
+\end{scope}
+}}}
+
+\tikzset{pics/cardbackprintable/.style n args={8}{%
+	code={
+	\begin{scope}
+	\clip (-\cardwidth/2 - \bleed, 0in) --%
+	      (-\cardwidth/2 - \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, \cardheight/2 + \bleed) --%
+	      (\cardwidth/2 + \bleed, -\cardheight/2 - \bleed) --%
+	      (-\cardwidth/2 - \bleed, -\cardheight/2 - \bleed) --%
+	      cycle;
+	% Pattern for card front
+	\pic () at (0,0) {cardfrontpattern2={#2}{#1}{#4}{#3}{#5}{#6}{#7}};
+	% Cutting guides for corners of the cards	
+	\pic () at (0,0) {cutguide={#8}};
+%	\node[draw, minimum width=\cardwidth, minimum height=\cardheight] at (0,0) {};
+
+\end{scope}
+}}}

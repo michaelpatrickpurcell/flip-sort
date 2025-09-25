@@ -1,0 +1,23 @@
+\documentclass{standalone}
+
+\usepackage{flipsort}
+
+
+\begin{document}
+\begin{tikzpicture}
+\large
+\path (-105mm, -148.5mm) -- (105mm, 148.5mm);
+\pic at (-\horizdist,\vertdist) {cardfrontprintable={\myheart}{\mydiamond}{black}};
+\pic at (0\horizdist,\vertdist) {cardfrontprintable={\myheart}{\myclub}{black}};
+\pic at (\horizdist,\vertdist) {cardfrontprintable={\myheart}{\myspade}{black}};
+
+\pic at (-\horizdist,0\vertdist) {cardfrontprintable={\mydiamond}{\myclub}{black}};
+\pic at (0\horizdist,0\vertdist) {cardfrontprintable={\mydiamond}{\myspade}{black}};
+\pic at (\horizdist,0\vertdist) {cardfrontprintable={\myclub}{\myspade}{black}};
+
+\pic at (-\horizdist,-\vertdist) {cardfrontprintable={\myheart}{\mydiamond}{black}};
+\pic at (0\horizdist,-\vertdist) {cardfrontprintable={\myheart}{\myclub}{black}};
+\pic at (\horizdist,-\vertdist) {cardfrontprintable={\myheart}{\myspade}{black}};
+
+\end{tikzpicture}
+\end{document}
